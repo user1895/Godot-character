@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://turn-based.gd" type="Script" id=1]
+[ext_resource path="res://battle.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://enemy.gd" type="Script" id=4]
+[ext_resource path="res://partner.gd" type="Script" id=5]
+[ext_resource path="res://enemy1.tscn" type="PackedScene" id=6]
+[ext_resource path="res://partner1.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 34.6198, 33.4071 )
+
+[node name="turn_based" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="turn" type="Node2D" parent="."]
+position = Vector2( 0.33371, 0.667419 )
+
+[node name="Button" type="Button" parent="turn"]
+margin_left = 87.2407
+margin_top = 29.883
+margin_right = 117.241
+margin_bottom = 57.883
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="attack" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="partner" type="Node2D" parent="attack"]
+script = ExtResource( 5 )
+
+[node name="partner1" type="KinematicBody2D" parent="attack/partner"]
+position = Vector2( 422.729, 282.027 )
+input_pickable = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack/partner/partner1"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="attack/partner/partner1"]
+texture = ExtResource( 3 )
+
+[node name="enemy" type="Node2D" parent="attack"]
+script = ExtResource( 4 )
+
+[node name="enemy1" parent="attack/enemy" instance=ExtResource( 6 )]
+
+[node name="enemy2" parent="attack/enemy" instance=ExtResource( 6 )]
+position = Vector2( 364.81, 94.3964 )
+
+[node name="enemy3" parent="attack/enemy" instance=ExtResource( 6 )]
+position = Vector2( 570.542, 86.072 )
+
+[connection signal="button_down" from="turn/Button" to="attack/partner/partner1" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy1" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy3" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy2" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/partner" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/enemy" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="." method="_on_Button_button_down"]
