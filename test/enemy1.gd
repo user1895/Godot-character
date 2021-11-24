@@ -1,28 +1,32 @@
 extends KinematicBody2D
 var attack=1
 var blood=10
-var choose2=false
+var defence=0
+
+var choose_enemy=false
 var target=Vector2()
-var action=0
+
+
 func _ready():
 	pass 
 func _process(delta):
 	target=get_global_mouse_position()
 	choose()
 	die()
+	
 func choose():
 	if Input.is_action_just_pressed("click")&& self.position.distance_to(target)<64:
-		choose2=true
+		choose_enemy=true
+		get_parent().chosed(get_path())
+		
 func die():
 	if Input.is_action_just_pressed("click"):
 		print(blood)
-		print(choose2)
+		print(choose_enemy)
 	if blood<=0:
-		choose2=false
+		choose_enemy=false
 		queue_free()
-
-
+		
 func _on_Button_button_down():
-	action=action+1
-	choose2=false
+	choose_enemy=false
 

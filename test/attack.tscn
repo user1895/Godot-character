@@ -36,9 +36,6 @@ script = ExtResource( 5 )
 position = Vector2( 422.729, 282.027 )
 input_pickable = true
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack/partner/partner1"]
 shape = SubResource( 1 )
@@ -57,10 +54,10 @@ position = Vector2( 364.81, 94.3964 )
 [node name="enemy3" parent="attack/enemy" instance=ExtResource( 6 )]
 position = Vector2( 570.542, 86.072 )
 
-[connection signal="button_down" from="turn/Button" to="attack/partner/partner1" method="_on_Button_button_down"]
-[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy1" method="_on_Button_button_down"]
-[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy3" method="_on_Button_button_down"]
-[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy2" method="_on_Button_button_down"]
-[connection signal="button_down" from="turn/Button" to="attack/partner" method="_on_Button_button_down"]
-[connection signal="button_down" from="turn/Button" to="attack/enemy" method="_on_Button_button_down"]
 [connection signal="button_down" from="turn/Button" to="." method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/partner" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/partner/partner1" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/enemy" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy1" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy2" method="_on_Button_button_down"]
+[connection signal="button_down" from="turn/Button" to="attack/enemy/enemy3" method="_on_Button_button_down"]

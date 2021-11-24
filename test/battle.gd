@@ -1,23 +1,20 @@
 extends Node2D
-var target=Vector2()
-var a
-var b
-var c
+
+var allies
+var enemies
+
 func _ready():
-	b=get_node("enemy")
-	a=get_node("partner")
+	allies=get_node("partner")
+	enemies=get_node("enemy")
 
 func _process(delta):
-	#_attack()
+	_attack()
 	pass
 
 func _attack():#攻击函数
-	if a.action>0 :
-		if a.choose3==true&&b.choose4==true: #&&Input.is_action_just_pressed("click"):
-			if b.flag ==true :
-				b.t.blood=b.t.blood-a.t.attack
-				a.t.action=0
-				print(b.t.blood)
-	pass
-func enemy_attack():
-	pass
+	if get_parent().turn>0:
+		if allies.chosed_ally!=null and enemies.chosed_enemy!=null and Input.is_action_just_pressed("click") and allies.chosed_ally.action :
+			enemies.chosed_enemy.blood=enemies.chosed_enemy.blood-allies.chosed_ally.attack
+			allies.chosed_ally.action=0
+			allies.chosed_ally.action=false
+			print(enemies.chosed_enemy.blood)
